@@ -12,6 +12,7 @@
 		B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF2288D3F8B006BCC49 /* PersistenceManager.swift */; };
 		B9532FF5288D9C83006BCC49 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF4288D9C83006BCC49 /* HapticsManager.swift */; };
 		B95921BB289155740049CAC9 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95921BA289155740049CAC9 /* SearchResultTableViewCell.swift */; };
+		B993260E2893790D001C8766 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B993260D2893790D001C8766 /* APIKeys.swift */; };
 		B9B7AA8D2889AC92001AB447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B7AA8C2889AC92001AB447 /* AppDelegate.swift */; };
 		B9B7AA8F2889AC92001AB447 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B7AA8E2889AC92001AB447 /* SceneDelegate.swift */; };
 		B9B7AA912889AC92001AB447 /* WatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B7AA902889AC92001AB447 /* WatchListViewController.swift */; };
@@ -26,6 +27,7 @@
 		B9532FF2288D3F8B006BCC49 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		B9532FF4288D9C83006BCC49 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		B95921BA289155740049CAC9 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		B993260D2893790D001C8766 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		B9B7AA892889AC92001AB447 /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B7AA8C2889AC92001AB447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9B7AA8E2889AC92001AB447 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				B9DC32A8288BB14000C825F2 /* ViewModels */,
 				B9DC32AA288BB34E00C825F2 /* Other */,
 				B9B7AA9A2889AC93001AB447 /* Info.plist */,
+				B993260D2893790D001C8766 /* APIKeys.swift */,
 			);
 			path = Stocks;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				B9532FF5288D9C83006BCC49 /* HapticsManager.swift in Sources */,
 				B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */,
 				B95921BB289155740049CAC9 /* SearchResultTableViewCell.swift in Sources */,
+				B993260E2893790D001C8766 /* APIKeys.swift in Sources */,
 				B9B7AA912889AC92001AB447 /* WatchListViewController.swift in Sources */,
 				B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */,
 				B9B7AA8D2889AC92001AB447 /* AppDelegate.swift in Sources */,
