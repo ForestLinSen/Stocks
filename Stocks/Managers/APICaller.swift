@@ -18,9 +18,12 @@ final class APICaller{
     }
     
     // MARK: - Public
-    public func search(query: String, completion: @escaping (Result<[String], Error>) -> Void){
+    public func search(query: String, completion: @escaping (Result<SearchResponse, Error>) -> Void){
         // "https://finnhub.io/api/v1/search?q=someQuery"
-        guard let url = createUrl(for: .search, queryParams: ["q":query]) else { return }
+        guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard safeQuery.count > 0, let url = createUrl(for: .search, queryParams: ["q":safeQuery]) else { return }
+        
+        request(url: url, expecting: SearchResponse.self, completion: completion)
     }
     
     // MARK: - Private
@@ -48,6 +51,7 @@ final class APICaller{
         // Convert query items to suffix string
         let queryString = queryItems.map { "\($0.name)=\($0.value ?? "")" }.joined(separator: "&")
         urlString += "?" + queryString
+        
         print("Debug: url \(urlString)")
         return URL(string: urlString)
     }

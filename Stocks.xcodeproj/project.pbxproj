@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
 		B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B950581E288E6FAE00F30903 /* SearchResultViewController.swift */; };
 		B9532FF1288D0401006BCC49 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF0288D0401006BCC49 /* APICaller.swift */; };
 		B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF2288D3F8B006BCC49 /* PersistenceManager.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B947A5E52894FEA00052038D /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B950581E288E6FAE00F30903 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		B9532FF0288D0401006BCC49 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		B9532FF2288D3F8B006BCC49 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		B9DC32A6288BB12E00C825F2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B947A5E52894FEA00052038D /* SearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				B993260E2893790D001C8766 /* APIKeys.swift in Sources */,
 				B9B7AA912889AC92001AB447 /* WatchListViewController.swift in Sources */,
 				B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */,
+				B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */,
 				B9B7AA8D2889AC92001AB447 /* AppDelegate.swift in Sources */,
 				B9B7AA8F2889AC92001AB447 /* SceneDelegate.swift in Sources */,
 				B9532FF1288D0401006BCC49 /* APICaller.swift in Sources */,
