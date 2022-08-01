@@ -78,6 +78,13 @@ extension WatchListViewController: UISearchResultsUpdating{
 
 extension WatchListViewController: SearchResultViewControllerDelegate{
     func searchResultViewControllerDidSelect(searchResult: SearchResult) {
-        print("Debug: search result :\(searchResult)")
+        
+        // dismiss the keyboard
+        navigationItem.searchController?.searchBar.resignFirstResponder()
+        
+        // Present stock details VC
+        let vc = StockDetailsViewController()
+        vc.title = searchResult.displaySymbol
+        present(UINavigationController(rootViewController: vc), animated: true)
     }
 }

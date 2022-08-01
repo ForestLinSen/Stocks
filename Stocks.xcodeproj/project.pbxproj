@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */; };
 		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
 		B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B950581E288E6FAE00F30903 /* SearchResultViewController.swift */; };
 		B9532FF1288D0401006BCC49 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF0288D0401006BCC49 /* APICaller.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
 		B947A5E52894FEA00052038D /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		B950581E288E6FAE00F30903 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		B9532FF0288D0401006BCC49 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				B9B7AA902889AC92001AB447 /* WatchListViewController.swift */,
 				B950581E288E6FAE00F30903 /* SearchResultViewController.swift */,
+				B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				B95921BB289155740049CAC9 /* SearchResultTableViewCell.swift in Sources */,
 				B993260E2893790D001C8766 /* APIKeys.swift in Sources */,
 				B9B7AA912889AC92001AB447 /* WatchListViewController.swift in Sources */,
+				B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */,
 				B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */,
 				B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */,
 				B9B7AA8D2889AC92001AB447 /* AppDelegate.swift in Sources */,
