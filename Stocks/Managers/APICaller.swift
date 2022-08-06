@@ -26,6 +26,38 @@ final class APICaller{
         request(url: url, expecting: SearchResponse.self, completion: completion)
     }
     
+    public func fetchNews(
+        for type: NewsViewController.NewsType,
+        completion: @escaping (Result<[NewsStory], Error>) -> Void
+    ){
+        
+        switch type {
+        case .topStories:
+            let url = createUrl(for: .topStories, queryParams: ["category": "general"])
+            request(url: url, expecting: [NewsStory].self) { result in
+                switch result {
+                case .success(let stories):
+                    print("Debug: stories: \(stories)")
+                case .failure(let error):
+                    print("Debug: cannot get top stories: \(error)")
+                }
+            }
+        case .company(let symbol):
+            let today = Date()
+            let oneMonthBack = today.addingTimeInterval(-(3600 * 24 * 7)) // 3600 = 1 hour
+            
+            let url = createUrl(for: .company,
+                                queryParams: [
+                                    "symbol": symbol,
+                                    "from": DateFormatter.newsDateFormatter.string(from: oneMonthBack),
+                                    "to": DateFormatter.newsDateFormatter.string(from: today)
+                                ])
+            request(url: url, expecting: [NewsStory].self, completion: completion)
+        }
+        
+        
+    }
+    
     // MARK: - Private
     private enum APIError: Error{
         case invalidUrl
@@ -34,6 +66,8 @@ final class APICaller{
     
     private enum Endpoint: String{
         case search
+        case topStories = "news"
+        case company = "company-news"
     }
     
     private func createUrl(for endpoint: Endpoint, queryParams: [String: String] = [:]) -> URL?{
