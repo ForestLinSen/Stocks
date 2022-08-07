@@ -26,6 +26,7 @@
 		B9B7AA942889AC92001AB447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9B7AA922889AC92001AB447 /* Main.storyboard */; };
 		B9B7AA962889AC93001AB447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B7AA952889AC93001AB447 /* Assets.xcassets */; };
 		B9B7AA992889AC93001AB447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9B7AA972889AC93001AB447 /* LaunchScreen.storyboard */; };
+		B9ED4FE0289F859A006755CD /* NewsStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		B9B7AA952889AC93001AB447 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9B7AA982889AC93001AB447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9B7AA9A2889AC93001AB447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStoryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				B95921BA289155740049CAC9 /* SearchResultTableViewCell.swift */,
 				B98BDA2E289C21CD008BB8A4 /* NewsHeaderView.swift */,
+				B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				B9B7AA912889AC92001AB447 /* WatchListViewController.swift in Sources */,
 				B96C34F0289E3D3400E1C2A1 /* NewsStory.swift in Sources */,
 				B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */,
+				B9ED4FE0289F859A006755CD /* NewsStoryTableViewCell.swift in Sources */,
 				B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */,
 				B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */,
 				B96C34F2289EA55000E1C2A1 /* Extensions.swift in Sources */,

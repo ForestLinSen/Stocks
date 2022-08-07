@@ -37,7 +37,7 @@ final class APICaller{
             request(url: url, expecting: [NewsStory].self) { result in
                 switch result {
                 case .success(let stories):
-                    print("Debug: stories: \(stories)")
+                    completion(.success(stories))
                 case .failure(let error):
                     print("Debug: cannot get top stories: \(error)")
                 }

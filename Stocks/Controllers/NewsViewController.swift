@@ -14,10 +14,12 @@ class NewsViewController: UIViewController {
         tableView.backgroundColor = .secondarySystemBackground
         // register cell
         tableView.register(NewsHeaderView.self, forHeaderFooterViewReuseIdentifier: NewsHeaderView.identifier)
+        tableView.register(NewsStoryTableViewCell.self, forCellReuseIdentifier: NewsStoryTableViewCell.identifier)
         return tableView
     }()
     
     private let type: NewsType
+    private var stories: [NewsStory] = []
     
     enum NewsType{
         case topStories
@@ -62,7 +64,19 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    private func fetchNews(){}
+    private func fetchNews(){
+        APICaller.shared.fetchNews(for: .topStories) { result in
+            switch result {
+            case .success(let stories):
+                self.stories = stories
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableView.reloadData()
+                }
+            case .failure(_):
+                return
+            }
+        }
+    }
     
     private func open(url: URL){}
 
@@ -70,21 +84,28 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return stories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .secondarySystemBackground
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsStoryTableViewCell.identifier) as? NewsStoryTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let newsStory = stories[indexPath.row]
+        cell.configure(with: .init(model: newsStory))
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return NewsStoryTableViewCell.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        //TODO: - Open News
     }
     
     // header height

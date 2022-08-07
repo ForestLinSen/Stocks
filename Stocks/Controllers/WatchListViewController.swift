@@ -21,15 +21,7 @@ class WatchListViewController: UIViewController {
         setUpSearchViewController()
         setUpFloatingPanel()
         setUpTitleView()
-        
-        APICaller.shared.fetchNews(for: .company(symbol: "AAPL")) { result in
-            switch result {
-            case .success(let news):
-                print("Debug: \(news)")
-            case .failure(let failure):
-                print("Debug: failure: \(failure)")
-            }
-        }
+
     }
     
     // MARK: - Private Functions
