@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B902058328A0EBF400482C91 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B902058228A0EBF400482C91 /* SDWebImage */; };
 		B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */; };
 		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
 		B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B950581E288E6FAE00F30903 /* SearchResultViewController.swift */; };
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B902058328A0EBF400482C91 /* SDWebImage in Frameworks */,
 				B98685AC289A3CE4007B14C2 /* FloatingPanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +176,7 @@
 			name = Stocks;
 			packageProductDependencies = (
 				B98685AB289A3CE4007B14C2 /* FloatingPanel */,
+				B902058228A0EBF400482C91 /* SDWebImage */,
 			);
 			productName = Stocks;
 			productReference = B9B7AA892889AC92001AB447 /* Stocks.app */;
@@ -205,6 +208,7 @@
 			mainGroup = B9B7AA802889AC92001AB447;
 			packageReferences = (
 				B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = B9B7AA8A2889AC92001AB447 /* Products */;
 			projectDirPath = "";
@@ -468,6 +472,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -479,6 +491,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B902058228A0EBF400482C91 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
 		B98685AB289A3CE4007B14C2 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
