@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsViewController: UIViewController {
     
@@ -78,7 +79,10 @@ class NewsViewController: UIViewController {
         }
     }
     
-    private func open(url: URL){}
+    private func open(url: URL){
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true)
+    }
 
 }
 
@@ -106,6 +110,18 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.deselectRow(at: indexPath, animated: true)
         
         //TODO: - Open News
+        let viewModel = stories[indexPath.row]
+        guard let url = URL(string: viewModel.url) else {
+            presentFailedToOpenAlert()
+            return
+        }
+        open(url: url)
+    }
+    
+    private func presentFailedToOpenAlert(){
+        let alert = UIAlertController(title: "Unable to open", message: "We were unable to open the article", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+        present(alert, animated: true)
     }
     
     // header height
