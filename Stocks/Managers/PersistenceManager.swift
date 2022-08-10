@@ -13,13 +13,20 @@ final class PersistenceManager{
     private let userDefaults: UserDefaults = .standard
     
     private struct Constants {
-        
+        static let onboardedKey = "hasOnboarded"
+        static let watchList = "watchlist"
     }
     
     private init() {}
     
     // MARK: - Public
     public var watchlist: [String] {
+        if !hasOnboarded{
+            userDefaults.setValue(true, forKey: Constants.onboardedKey)
+            setUpDefaults()
+            return userDefaults.stringArray(forKey: Constants.watchList) ?? []
+        }
+        
         return []
     }
     
@@ -32,4 +39,22 @@ final class PersistenceManager{
     }
     
     // MARK: - Private
+    private var hasOnboarded: Bool {
+        return userDefaults.bool(forKey: Constants.onboardedKey)
+    }
+    
+    private func setUpDefaults() {
+        let map: [String: String] = [
+            "AAPL": "Apple Inc",
+            "MSFT": "Microsoft Corporation",
+            "GOOG": "Alphabet"
+        ]
+        
+        let symbols = map.keys.map{ $0 }
+        userDefaults.setValue(symbols, forKey: "watchlist")
+        
+        for (symbol, name) in map{
+            userDefaults.set(name, forKey: symbol)
+        }
+    }
 }
