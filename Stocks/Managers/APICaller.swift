@@ -54,7 +54,25 @@ final class APICaller{
                                 ])
             request(url: url, expecting: [NewsStory].self, completion: completion)
         }
+    }
+    
+    /// Fetch Candle data of the given symbol
+    public func marketData(
+        for symbol: String,
+        numberOfDays: Int = 7,
+        completion: @escaping (Result<String, Error>) -> Void
+    ){
+        let today = Date()
+        let oneMonthBack = today.addingTimeInterval(-(3600 * 24 * Double(numberOfDays))) // 3600 = 1 hour
         
+        let url = createUrl(for: .marketData, queryParams: [
+            "symbol": symbol,
+            "resolution": "1",
+            "from": DateFormatter.newsDateFormatter.string(from: oneMonthBack),
+            "to": DateFormatter.newsDateFormatter.string(from: today)
+        ])
+        
+        request(url: url, expecting: String.self, completion: completion)
         
     }
     
@@ -68,6 +86,7 @@ final class APICaller{
         case search
         case topStories = "news"
         case company = "company-news"
+        case marketData = "stock/candle"
     }
     
     private func createUrl(for endpoint: Endpoint, queryParams: [String: String] = [:]) -> URL?{
