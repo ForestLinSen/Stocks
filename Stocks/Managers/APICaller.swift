@@ -60,19 +60,21 @@ final class APICaller{
     public func marketData(
         for symbol: String,
         numberOfDays: Int = 7,
-        completion: @escaping (Result<String, Error>) -> Void
+        completion: @escaping (Result<MarketDataResponse, Error>) -> Void
     ){
         let today = Date()
-        let oneMonthBack = today.addingTimeInterval(-(3600 * 24 * Double(numberOfDays))) // 3600 = 1 hour
+        let from = today.addingTimeInterval(-(3600 * 24 * Double(numberOfDays))) // 3600 = 1 hour
         
         let url = createUrl(for: .marketData, queryParams: [
             "symbol": symbol,
             "resolution": "1",
-            "from": DateFormatter.newsDateFormatter.string(from: oneMonthBack),
-            "to": DateFormatter.newsDateFormatter.string(from: today)
+            "from": "\(Int(from.timeIntervalSince1970))",
+            "to": "\(Int(today.timeIntervalSince1970))"
         ])
         
-        request(url: url, expecting: String.self, completion: completion)
+        request(url: url,
+                expecting: MarketDataResponse.self,
+                completion: completion)
         
     }
     

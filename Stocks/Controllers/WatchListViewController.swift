@@ -32,6 +32,15 @@ class WatchListViewController: UIViewController {
         setUpWatchlistData()
         setUpFloatingPanel()
         setUpTitleView()
+        
+        APICaller.shared.marketData(for: "GOOG") { result in
+            switch result {
+            case .success(let success):
+                print("Debug: \(success)")
+            case .failure(let error):
+                print("Debug: cannot get market data \(error)")
+            }
+        }
 
     }
     
