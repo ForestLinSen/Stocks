@@ -18,7 +18,7 @@ class WatchListViewController: UIViewController {
     }()
     
     /// Model
-    private var watchlistMap: [String: [String]] = [:]
+    private var watchlistMap: [String: [CandleStick]] = [:]
     
     /// ViewModels
     
@@ -35,8 +35,8 @@ class WatchListViewController: UIViewController {
         
         APICaller.shared.marketData(for: "GOOG") { result in
             switch result {
-            case .success(let success):
-                print("Debug: \(success)")
+            case .success(let response):
+                print("Debug: \(response.candleSticks[0])")
             case .failure(let error):
                 print("Debug: cannot get market data \(error)")
             }
@@ -55,13 +55,34 @@ class WatchListViewController: UIViewController {
     private func setUpWatchlistData(){
         let symbols = PersistenceManager.shared.watchlist
         
+        // concurrently fetch data
+        let group = DispatchGroup()
+        
+        
         for symbol in symbols{
-            watchlistMap[symbol] = [""]
+            group.enter()
+            
+            APICaller.shared.marketData(for: symbol) { [weak self] result in
+                
+                defer {
+                    group.leave()
+                }
+                
+                switch result {
+                case .success(let data):
+                    let candleSticks = data.candleSticks
+                    self?.watchlistMap[symbol] = candleSticks
+                case .failure(let error):
+                    print("Debug: something went wrong \(error)")
+                }
+            }
+            
         }
         
-        DispatchQueue.main.async {[weak self] in
+        group.notify(queue: .main) { [weak self] in
             self?.tableView.reloadData()
         }
+        
         
     }
     
