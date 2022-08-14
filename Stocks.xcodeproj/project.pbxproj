@@ -29,6 +29,7 @@
 		B9B7AA962889AC93001AB447 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B7AA952889AC93001AB447 /* Assets.xcassets */; };
 		B9B7AA992889AC93001AB447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9B7AA972889AC93001AB447 /* LaunchScreen.storyboard */; };
 		B9ED4FE0289F859A006755CD /* NewsStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */; };
+		B9F34E7328A76FDA00BC6AF8 /* WatchlistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F34E7228A76FDA00BC6AF8 /* WatchlistTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		B9B7AA982889AC93001AB447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9B7AA9A2889AC93001AB447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStoryTableViewCell.swift; sourceTree = "<group>"; };
+		B9F34E7228A76FDA00BC6AF8 /* WatchlistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				B95921BA289155740049CAC9 /* SearchResultTableViewCell.swift */,
 				B98BDA2E289C21CD008BB8A4 /* NewsHeaderView.swift */,
 				B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */,
+				B9F34E7228A76FDA00BC6AF8 /* WatchlistTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B98685AE289A4BAB007B14C2 /* NewsViewController.swift in Sources */,
+				B9F34E7328A76FDA00BC6AF8 /* WatchlistTableViewCell.swift in Sources */,
 				B9532FF5288D9C83006BCC49 /* HapticsManager.swift in Sources */,
 				B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */,
 				B95921BB289155740049CAC9 /* SearchResultTableViewCell.swift in Sources */,

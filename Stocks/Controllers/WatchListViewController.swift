@@ -80,10 +80,16 @@ class WatchListViewController: UIViewController {
         }
         
         group.notify(queue: .main) { [weak self] in
+            self?.createViewModels()
             self?.tableView.reloadData()
         }
-        
-        
+    }
+    
+    
+    private func createViewModels(){
+        for (symbol, candleStick) in watchlistMap{
+            
+        }
     }
     
     private func setUpSearchViewController(){
