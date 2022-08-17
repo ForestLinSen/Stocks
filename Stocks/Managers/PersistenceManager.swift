@@ -24,10 +24,9 @@ final class PersistenceManager{
         if !hasOnboarded{
             userDefaults.setValue(true, forKey: Constants.onboardedKey)
             setUpDefaults()
-            return userDefaults.stringArray(forKey: Constants.watchList) ?? []
         }
         
-        return []
+        return userDefaults.stringArray(forKey: Constants.watchList) ?? []
     }
     
     public func addToWatchlist(){
@@ -46,8 +45,8 @@ final class PersistenceManager{
     private func setUpDefaults() {
         let map: [String: String] = [
             "AAPL": "Apple Inc",
-            "MSFT": "Microsoft Corporation",
-            "GOOG": "Alphabet"
+//            "MSFT": "Microsoft Corporation",
+//            "GOOG": "Alphabet"
         ]
         
         let symbols = map.keys.map{ $0 }

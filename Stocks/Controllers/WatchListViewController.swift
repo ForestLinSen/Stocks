@@ -53,6 +53,9 @@ class WatchListViewController: UIViewController {
     }
     
     private func setUpWatchlistData(){
+        
+        print("Debug: begin to set up watch list data")
+        
         let symbols = PersistenceManager.shared.watchlist
         
         // concurrently fetch data
@@ -80,6 +83,7 @@ class WatchListViewController: UIViewController {
         }
         
         group.notify(queue: .main) { [weak self] in
+            print("Debug: group notify")
             self?.createViewModels()
             self?.tableView.reloadData()
         }
@@ -87,9 +91,41 @@ class WatchListViewController: UIViewController {
     
     
     private func createViewModels(){
+        var viewModels = [WatchlistTableViewCell.ViewModel]()
+        
         for (symbol, candleStick) in watchlistMap{
             
+            let changePercentage = getChangePercentage(for: candleStick)
+            
+            viewModels.append(.init(symbol: symbol,
+                                    companyName: UserDefaults.standard.string(forKey: symbol) ?? "Company",
+                                    price: getLatestClosingPrice(from: candleStick),
+                                    changeColor: changePercentage < 0 ? .systemRed : .systemGreen,
+                                    changePercentage: "\(changePercentage)"))
         }
+    }
+    
+    private func getChangePercentage(for data: [CandleStick]) -> Double {
+        let priorDate = Date().addingTimeInterval(-3600*24*2)
+        
+        guard let latestClose = data.first?.close,
+              let priorClose = data.first(where: {
+                  Calendar.current.isDate($0.date, inSameDayAs: priorDate)
+              })?.close else {
+            return 0
+        }
+        
+        print("Debug: Current: \(latestClose) Prior: \(priorClose)")
+        
+        return 0.0
+    }
+    
+    private func getLatestClosingPrice(from data: [CandleStick]) -> String {
+        guard let closingPrice = data.first?.close else {
+            return ""
+        }
+        
+        return "\(closingPrice)"
     }
     
     private func setUpSearchViewController(){
