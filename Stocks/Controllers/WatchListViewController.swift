@@ -33,14 +33,14 @@ class WatchListViewController: UIViewController {
         setUpFloatingPanel()
         setUpTitleView()
         
-        APICaller.shared.marketData(for: "GOOG") { result in
-            switch result {
-            case .success(let response):
-                print("Debug: \(response.candleSticks[0])")
-            case .failure(let error):
-                print("Debug: cannot get market data \(error)")
-            }
-        }
+//        APICaller.shared.marketData(for: "GOOG") { result in
+//            switch result {
+//            case .success(let response):
+//                print("Debug: \(response.candleSticks[0])")
+//            case .failure(let error):
+//                print("Debug: cannot get market data \(error)")
+//            }
+//        }
 
     }
     
@@ -94,7 +94,7 @@ class WatchListViewController: UIViewController {
         var viewModels = [WatchlistTableViewCell.ViewModel]()
         
         for (symbol, candleStick) in watchlistMap{
-            
+
             let changePercentage = getChangePercentage(for: candleStick)
             
             viewModels.append(.init(symbol: symbol,
@@ -106,18 +106,19 @@ class WatchListViewController: UIViewController {
     }
     
     private func getChangePercentage(for data: [CandleStick]) -> Double {
-        let priorDate = Date().addingTimeInterval(-3600*24*2)
+        let latestDate = data[0].date
         
         guard let latestClose = data.first?.close,
               let priorClose = data.first(where: {
-                  Calendar.current.isDate($0.date, inSameDayAs: priorDate)
+                  !Calendar.current.isDate($0.date, inSameDayAs: latestDate)
               })?.close else {
             return 0
         }
         
-        print("Debug: Current: \(latestClose) Prior: \(priorClose)")
+        let diff = priorClose / latestClose
+        print("Debug: Current: \(latestClose) Prior: \(priorClose) Diff: \(diff)")
         
-        return 0.0
+        return diff
     }
     
     private func getLatestClosingPrice(from data: [CandleStick]) -> String {
