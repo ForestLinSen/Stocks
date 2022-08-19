@@ -115,7 +115,7 @@ class WatchListViewController: UIViewController {
             return 0
         }
         
-        let diff = priorClose / latestClose
+        let diff = 1 - (priorClose / latestClose)
         print("Debug: Current: \(latestClose) Prior: \(priorClose) Diff: \(diff)")
         
         return diff
@@ -126,7 +126,7 @@ class WatchListViewController: UIViewController {
             return ""
         }
         
-        return "\(closingPrice)"
+        return String.formatted(number: closingPrice)
     }
     
     private func setUpSearchViewController(){
