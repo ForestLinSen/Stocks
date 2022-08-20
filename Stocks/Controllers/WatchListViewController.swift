@@ -14,11 +14,14 @@ class WatchListViewController: UIViewController {
     private var panel: FloatingPanelController?
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(WatchlistTableViewCell.self,
+                           forCellReuseIdentifier: WatchlistTableViewCell.identifier)
         return tableView
     }()
     
     /// Model
     private var watchlistMap: [String: [CandleStick]] = [:]
+    private var viewModels = [WatchlistTableViewCell.ViewModel]()
     
     /// ViewModels
     
@@ -32,16 +35,6 @@ class WatchListViewController: UIViewController {
         setUpWatchlistData()
         setUpFloatingPanel()
         setUpTitleView()
-        
-//        APICaller.shared.marketData(for: "GOOG") { result in
-//            switch result {
-//            case .success(let response):
-//                print("Debug: \(response.candleSticks[0])")
-//            case .failure(let error):
-//                print("Debug: cannot get market data \(error)")
-//            }
-//        }
-
     }
     
     // MARK: - Private Functions
@@ -50,6 +43,11 @@ class WatchListViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
     private func setUpWatchlistData(){
@@ -101,8 +99,10 @@ class WatchListViewController: UIViewController {
                                     companyName: UserDefaults.standard.string(forKey: symbol) ?? "Company",
                                     price: getLatestClosingPrice(from: candleStick),
                                     changeColor: changePercentage < 0 ? .systemRed : .systemGreen,
-                                    changePercentage: "\(changePercentage)"))
+                                    changePercentage: NumberFormatter.percentFormatter.string(from: NSNumber(value: changePercentage)) ?? ""))
         }
+        
+        self.viewModels = viewModels
     }
     
     private func getChangePercentage(for data: [CandleStick]) -> Double {
@@ -216,11 +216,20 @@ extension WatchListViewController: FloatingPanelControllerDelegate{
 
 extension WatchListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return watchlistMap.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: WatchlistTableViewCell.identifier, for: indexPath) as? WatchlistTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(with: viewModels[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return WatchlistTableViewCell.preferredHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
