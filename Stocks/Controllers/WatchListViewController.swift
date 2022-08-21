@@ -19,6 +19,8 @@ class WatchListViewController: UIViewController {
         return tableView
     }()
     
+    static var maxChangeWidth: CGFloat = 0
+    
     /// Model
     private var watchlistMap: [String: [CandleStick]] = [:]
     private var viewModels = [WatchlistTableViewCell.ViewModel]()
@@ -99,7 +101,10 @@ class WatchListViewController: UIViewController {
                                     companyName: UserDefaults.standard.string(forKey: symbol) ?? "Company",
                                     price: getLatestClosingPrice(from: candleStick),
                                     changeColor: changePercentage < 0 ? .systemRed : .systemGreen,
-                                    changePercentage: NumberFormatter.percentFormatter.string(from: NSNumber(value: changePercentage)) ?? ""))
+                                    changePercentage: NumberFormatter.percentFormatter.string(from: NSNumber(value: changePercentage)) ?? "",
+                                    chartViewModel: .init(data: candleStick.reversed().map{ $0.close },
+                                                          showLegend: false,
+                                                          showAxis: false)))
         }
         
         self.viewModels = viewModels
@@ -225,6 +230,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         cell.configure(with: viewModels[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -239,4 +245,10 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     
+}
+
+extension WatchListViewController: WatchListTableViewCellDelegate{
+    func didUpdateMaxWidth() {
+        tableView.reloadData()
+    }
 }

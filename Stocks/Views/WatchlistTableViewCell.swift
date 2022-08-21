@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol WatchListTableViewCellDelegate: AnyObject{
+    func didUpdateMaxWidth()
+}
+
 class WatchlistTableViewCell: UITableViewCell {
     static let identifier = "WatchlistTableViewCell"
     static let preferredHeight: CGFloat = 60
+    weak var delegate: WatchListTableViewCellDelegate?
     
     struct ViewModel{
         let symbol: String
@@ -17,6 +22,7 @@ class WatchlistTableViewCell: UITableViewCell {
         let price: String
         let changeColor: UIColor
         let changePercentage: String
+        let chartViewModel: StockChartView.ViewModel
     }
     
     // MARK: - Cell Components
@@ -38,6 +44,7 @@ class WatchlistTableViewCell: UITableViewCell {
     private let miniChartView: StockChartView = {
         let chart = StockChartView()
         chart.backgroundColor = .link
+        chart.clipsToBounds = true
         return chart
     }()
     
@@ -45,18 +52,23 @@ class WatchlistTableViewCell: UITableViewCell {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.textAlignment = .right
         return label
     }()
     
     // Change in Price Label
     private let changeLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .right
         label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.layer.masksToBounds = true
+        //label.layer.cornerRadius = 6
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.clipsToBounds = true
         
         addSubview(symbolLabel)
         addSubview(companyLabel)
@@ -85,18 +97,27 @@ class WatchlistTableViewCell: UITableViewCell {
         
         companyLabel.frame = CGRect(x: separatorInset.left,
                                     y: symbolLabel.frame.origin.y + symbolLabel.frame.height,
-                                    width: symbolLabel.frame.width,
-                                    height: symbolLabel.frame.height)
+                                    width: companyLabel.frame.width,
+                                    height: companyLabel.frame.height)
         
-        priceLabel.frame = CGRect(x: contentView.frame.width - 10 - priceLabel.frame.width,
-                                    y: 0,
-                                    width: priceLabel.frame.width,
+        let currentWidth = max(max(priceLabel.frame.width,
+                                   changeLabel.frame.width),
+                               WatchListViewController.maxChangeWidth)
+        
+        if currentWidth > WatchListViewController.maxChangeWidth {
+            WatchListViewController.maxChangeWidth = currentWidth
+            delegate?.didUpdateMaxWidth()
+        }
+        
+        priceLabel.frame = CGRect(x: contentView.frame.width - 10 - currentWidth,
+                                  y: (contentView.frame.height - priceLabel.frame.height - changeLabel.frame.height)/2,
+                                    width: currentWidth,
                                     height: priceLabel.frame.height)
         
-        changeLabel.frame = CGRect(x: contentView.frame.width - 10 - changeLabel.frame.width,
+        changeLabel.frame = CGRect(x: contentView.frame.width - 10 - currentWidth,
                                     y: priceLabel.frame.origin.y + priceLabel.frame.height,
-                                    width: changeLabel.frame.width,
-                                    height: changeLabel.frame.height)
+                                    width: currentWidth + 2,
+                                    height: changeLabel.frame.height + 2)
         
         miniChartView.frame = CGRect(x: priceLabel.frame.origin.x - contentView.frame.width/3 - 5,
                                      y: 6,
