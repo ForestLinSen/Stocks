@@ -19,6 +19,8 @@ class WatchListViewController: UIViewController {
         return tableView
     }()
     
+    private var observer: NSObjectProtocol?
+    
     static var maxChangeWidth: CGFloat = 0
     
     /// Model
@@ -37,9 +39,19 @@ class WatchListViewController: UIViewController {
         setUpWatchlistData()
         setUpFloatingPanel()
         setUpTitleView()
+        setUpObserver()
     }
     
     // MARK: - Private Functions
+    
+    private func setUpObserver() {
+        observer = NotificationCenter.default.addObserver(forName: .didAddToWatchList,
+                                                          object: nil,
+                                                          queue: .main, using: { [weak self] _ in
+            self?.viewModels.removeAll()
+            self?.setUpWatchlistData()
+        })
+    }
     
     private func setUpTableView(){
         view.addSubview(tableView)
@@ -62,7 +74,7 @@ class WatchListViewController: UIViewController {
         let group = DispatchGroup()
         
         
-        for symbol in symbols{
+        for symbol in symbols where watchlistMap[symbol] == nil{
             group.enter()
             
             APICaller.shared.marketData(for: symbol) { [weak self] result in
@@ -94,7 +106,7 @@ class WatchListViewController: UIViewController {
         var viewModels = [WatchlistTableViewCell.ViewModel]()
         
         for (symbol, candleStick) in watchlistMap{
-
+            
             let changePercentage = getChangePercentage(for: candleStick)
             
             viewModels.append(.init(symbol: symbol,
@@ -234,6 +246,31 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            
+            // Update persistence
+            PersistenceManager.shared.removeFromWatchlist(symbol: viewModels[indexPath.row].symbol)
+            
+            // Update viewModels
+            viewModels.remove(at: indexPath.row)
+            
+            // Delete Row
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            tableView.endUpdates()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return WatchlistTableViewCell.preferredHeight
     }
@@ -243,7 +280,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource{
         
         // MARK: - Open Details for Selection
     }
-
+    
     
 }
 
