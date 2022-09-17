@@ -36,13 +36,10 @@ class SearchResultViewController: UIViewController {
     }
     
     public func update(with results: [SearchResult]){
-        
         DispatchQueue.main.async { [weak self] in
             self?.results = results
             self?.searchResultstalbeView.reloadData()
         }
-        
-        
     }
     
 }
@@ -59,7 +56,6 @@ extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource
         var config = cell.defaultContentConfiguration()
         config.text = model.displaySymbol
         config.secondaryText = model.description
-        
         cell.contentConfiguration = config
         
         return cell
@@ -70,6 +66,10 @@ extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let model = results[indexPath.row]
         delegate?.searchResultViewControllerDidSelect(searchResult: model)
+        let vc = StockDetailsViewController(symbol: model.displaySymbol,
+                                            companyName: model.description,
+                                            candleStickData: [])
+        present(vc, animated: true)
     }
     
     

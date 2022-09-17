@@ -23,6 +23,8 @@ class WatchListViewController: UIViewController {
     
     static var maxChangeWidth: CGFloat = 0
     
+    var searchWorkItem: DispatchWorkItem?
+    
     /// Model
     private var watchlistMap: [String: [CandleStick]] = [:]
     private var viewModels = [WatchlistTableViewCell.ViewModel]()
@@ -177,19 +179,17 @@ class WatchListViewController: UIViewController {
 
 extension WatchListViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
+        
+        searchWorkItem?.cancel()
+        
         guard let query = searchController.searchBar.text,
               let resultVC = searchController.searchResultsController as? SearchResultViewController else {
             print("Debug: cannot get query or result VC")
             return
         }
         
-        // Reset timer
-        searchTimer?.invalidate()
-        
-        // Optimize to reduce API call
-        // Kick off new timer
-        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { _ in
-            // Call API call to search
+        // MARK: - use workItem to perform search API
+        let searchItem = DispatchWorkItem {
             APICaller.shared.search(query: query) { result in
                 switch result {
                 case .success(let results):
@@ -200,11 +200,29 @@ extension WatchListViewController: UISearchResultsUpdating{
                     print("Debug: cannot get result: \(failure)")
                 }
             }
-        })
+        }
+        
+        searchWorkItem = searchItem
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(300)
+                                          , execute: searchItem)
         
         
-        
-        
+        // MARK: - use timer to reset the search function
+        //        searchTimer?.invalidate()
+        //        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { _ in
+        //            // Call API call to search
+        //            APICaller.shared.search(query: query) { result in
+        //                switch result {
+        //                case .success(let results):
+        //                    // Update the results controller
+        //                    resultVC.update(with: results.result)
+        //
+        //                case .failure(let failure):
+        //                    print("Debug: cannot get result: \(failure)")
+        //                }
+        //            }
+        //        })
+ 
     }
     
     
@@ -217,9 +235,9 @@ extension WatchListViewController: SearchResultViewControllerDelegate{
         navigationItem.searchController?.searchBar.resignFirstResponder()
         
         // Present stock details VC
-//        let vc = StockDetailsViewController(symbol: <#T##String#>, companyName: <#T##String#>, candleStickData: <#T##[CandleStick]#>)
-//        vc.title = searchResult.displaySymbol
-//        present(UINavigationController(rootViewController: vc), animated: true)
+        //        let vc = StockDetailsViewController(symbol: <#T##String#>, companyName: <#T##String#>, candleStickData: <#T##[CandleStick]#>)
+        //        vc.title = searchResult.displaySymbol
+        //        present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
 
