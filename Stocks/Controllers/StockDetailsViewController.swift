@@ -73,6 +73,7 @@ class StockDetailsViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width * 0.7 + 100))
+        
     }
     
     func fetchFinancialData() {
@@ -99,7 +100,13 @@ class StockDetailsViewController: UIViewController {
     }
     
     func renderChart() {
+        let headerView = StockDetailsHeaderView(frame: CGRect(x: 0, y: 0,
+                                                              width: view.frame.width,
+                                                              height: view.frame.height * 0.6))
         
+        // Configure
+        headerView.backgroundColor = .link
+        tableView.tableHeaderView = headerView
     }
 
 }

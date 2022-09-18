@@ -10,6 +10,7 @@
 		B902058328A0EBF400482C91 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B902058228A0EBF400482C91 /* SDWebImage */; };
 		B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */; };
 		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
+		B94B7E6A28D70CD000873716 /* StockDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94B7E6928D70CD000873716 /* StockDetailsHeaderView.swift */; };
 		B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B950581E288E6FAE00F30903 /* SearchResultViewController.swift */; };
 		B952739E28B0C09100AB579D /* StockChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B952739D28B0C09100AB579D /* StockChartView.swift */; };
 		B9532FF1288D0401006BCC49 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF0288D0401006BCC49 /* APICaller.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
 		B947A5E52894FEA00052038D /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		B94B7E6928D70CD000873716 /* StockDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsHeaderView.swift; sourceTree = "<group>"; };
 		B950581E288E6FAE00F30903 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		B952739D28B0C09100AB579D /* StockChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockChartView.swift; sourceTree = "<group>"; };
 		B9532FF0288D0401006BCC49 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				B9ED4FDF289F859A006755CD /* NewsStoryTableViewCell.swift */,
 				B9F34E7228A76FDA00BC6AF8 /* WatchlistTableViewCell.swift */,
 				B952739D28B0C09100AB579D /* StockChartView.swift */,
+				B94B7E6928D70CD000873716 /* StockDetailsHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B98685AE289A4BAB007B14C2 /* NewsViewController.swift in Sources */,
+				B94B7E6A28D70CD000873716 /* StockDetailsHeaderView.swift in Sources */,
 				B9F34E7328A76FDA00BC6AF8 /* WatchlistTableViewCell.swift in Sources */,
 				B9532FF5288D9C83006BCC49 /* HapticsManager.swift in Sources */,
 				B950581F288E6FAE00F30903 /* SearchResultViewController.swift in Sources */,
