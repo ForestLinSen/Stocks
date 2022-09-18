@@ -78,6 +78,10 @@ final class APICaller{
         
     }
     
+    public func searchMetrics(symbol: String, completion: @escaping (Result<MetricsResponse, Error>) -> Void) {
+        
+    }
+    
     // MARK: - Private
     private enum APIError: Error{
         case invalidUrl
