@@ -79,7 +79,11 @@ final class APICaller{
     }
     
     public func searchMetrics(symbol: String, completion: @escaping (Result<MetricsResponse, Error>) -> Void) {
+        let url = createUrl(for: .metrics, queryParams: [
+            "symbol": symbol
+        ])
         
+        request(url: url, expecting: MetricsResponse.self, completion: completion)
     }
     
     // MARK: - Private
@@ -93,6 +97,7 @@ final class APICaller{
         case topStories = "news"
         case company = "company-news"
         case marketData = "stock/candle"
+        case metrics = "stock/metric"
     }
     
     private func createUrl(for endpoint: Endpoint, queryParams: [String: String] = [:]) -> URL?{
