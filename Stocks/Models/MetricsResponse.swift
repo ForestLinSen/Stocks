@@ -8,7 +8,7 @@
 import Foundation
 
 struct MetricsResponse: Codable {
-    let data: [Metrics]
+    let metric: Metrics
     let symbol: String
 }
 

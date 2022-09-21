@@ -29,6 +29,8 @@ class MetricsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.clipsToBounds = true
+        contentView.addSubview(valueLabel)
+        contentView.addSubview(nameLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -41,10 +43,21 @@ class MetricsCollectionViewCell: UICollectionViewCell {
         valueLabel.sizeToFit()
         nameLabel.sizeToFit()
         
+        nameLabel.frame = CGRect(x: 3, y: 0,
+                                 width: nameLabel.frame.width, height: contentView.frame.height)
+        valueLabel.frame = CGRect(x: nameLabel.frame.width + nameLabel.frame.origin.x + 3, y: 0,
+                                  width: valueLabel.frame.width, height: contentView.frame.height)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        nameLabel.text = nil
+        valueLabel.text = nil
+    }
+    
+    func configure(with viewModel: ViewModel) {
+        nameLabel.text = viewModel.name
+        valueLabel.text = viewModel.value
     }
     
     

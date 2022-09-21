@@ -15,6 +15,7 @@ class StockDetailsViewController: UIViewController {
     private let companyName: String
     private let candleStickData: [CandleStick]
     private var stories: [NewsStory] = []
+    private var metrics: Metrics?
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -78,9 +79,35 @@ class StockDetailsViewController: UIViewController {
     
     func fetchFinancialData() {
         
+        let group = DispatchGroup()
+        
         // Fetch candle sticks if needed
+//        if candleStickData.isEmpty {
+//            group.enter()
+//        }
         
         // Fetch financial metrics
+        group.enter()
+        APICaller.shared.searchMetrics(symbol: symbol) { [weak self] result in
+            print("Debug: get metrics data")
+            defer {
+                group.leave()
+            }
+            
+            switch result {
+            case .success(let response):
+                let metricsData = response.metric
+                self?.metrics = metricsData
+                
+            case .failure(let error):
+                print("Debug: cannot get metric model: \(error)")
+            }
+            
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.renderChart()
+        }
         
         renderChart()
     }
@@ -100,13 +127,35 @@ class StockDetailsViewController: UIViewController {
     }
     
     func renderChart() {
-        let headerView = StockDetailsHeaderView(frame: CGRect(x: 0, y: 0,
-                                                              width: view.frame.width,
-                                                              height: view.frame.height * 0.6))
+        let headerView = StockDetailsHeaderView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: view.frame.width,
+                height: (view.frame.width * 0.7) + 100
+            )
+        )
         
         // Configure
+        
+        
+        var viewModels = [MetricsCollectionViewCell.ViewModel]()
+        
+        if let metric = metrics {
+            viewModels.append(.init(name: "52 High", value: "\(metric.AnnualWeekHigh)"))
+            viewModels.append(.init(name: "52 High", value: "\(metric.AnnualWeekLow)"))
+            viewModels.append(.init(name: "52 Return", value: "\(metric.AnnualWeekPriceReturnDaily)"))
+            viewModels.append(.init(name: "Beta", value: "\(metric.beta)"))
+            viewModels.append(.init(name: "10D Vol.", value: "\(metric.TenDayAverageTradingVolume)"))
+        }
+        
+        print("Debug: metric viewModels: \(viewModels)")
+        
         headerView.backgroundColor = .link
+        headerView.configure(chartViewModel: .init(data: [], showLegend: false, showAxis: false),
+                             metricsViewModels: viewModels)
         tableView.tableHeaderView = headerView
+        
     }
 
 }
