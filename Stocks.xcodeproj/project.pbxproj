@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B902058328A0EBF400482C91 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B902058228A0EBF400482C91 /* SDWebImage */; };
 		B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */; };
+		B921946B28DC806F00C03479 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B921946A28DC806F00C03479 /* Charts */; };
 		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
 		B94B7E6A28D70CD000873716 /* StockDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94B7E6928D70CD000873716 /* StockDetailsHeaderView.swift */; };
 		B94B7E6C28D75F7100873716 /* MetricsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94B7E6B28D75F7100873716 /* MetricsResponse.swift */; };
@@ -72,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B902058328A0EBF400482C91 /* SDWebImage in Frameworks */,
+				B921946B28DC806F00C03479 /* Charts in Frameworks */,
 				B98685AC289A3CE4007B14C2 /* FloatingPanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,6 +197,7 @@
 			packageProductDependencies = (
 				B98685AB289A3CE4007B14C2 /* FloatingPanel */,
 				B902058228A0EBF400482C91 /* SDWebImage */,
+				B921946A28DC806F00C03479 /* Charts */,
 			);
 			productName = Stocks;
 			productReference = B9B7AA892889AC92001AB447 /* Stocks.app */;
@@ -227,6 +230,7 @@
 			packageReferences = (
 				B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = B9B7AA8A2889AC92001AB447 /* Products */;
 			projectDirPath = "";
@@ -504,6 +508,14 @@
 				kind = branch;
 			};
 		};
+		B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -519,6 +531,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		B921946A28DC806F00C03479 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 		B98685AB289A3CE4007B14C2 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
