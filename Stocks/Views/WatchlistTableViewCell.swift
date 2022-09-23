@@ -43,7 +43,6 @@ class WatchlistTableViewCell: UITableViewCell {
     // MiniChart View
     private let miniChartView: StockChartView = {
         let chart = StockChartView()
-        chart.backgroundColor = .link
         chart.clipsToBounds = true
         return chart
     }()

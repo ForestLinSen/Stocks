@@ -13,7 +13,7 @@ class StockDetailsViewController: UIViewController {
     // MARK: - Properties
     private let symbol: String
     private let companyName: String
-    private let candleStickData: [CandleStick]
+    private var candleStickData: [CandleStick]
     private var stories: [NewsStory] = []
     private var metrics: Metrics?
     
@@ -82,9 +82,23 @@ class StockDetailsViewController: UIViewController {
         let group = DispatchGroup()
         
         // Fetch candle sticks if needed
-//        if candleStickData.isEmpty {
-//            group.enter()
-//        }
+        if candleStickData.isEmpty {
+            group.enter()
+            
+            APICaller.shared.marketData(for: symbol) { [weak self] result in
+                defer {
+                    group.leave()
+                }
+                
+                switch result {
+                    
+                case .success(let response):
+                    self?.candleStickData = response.candleSticks
+                case .failure(let error):
+                    print("Debug: cannot fetch market data: \(error)")
+                }
+            }
+        }
         
         // Fetch financial metrics
         group.enter()
@@ -152,7 +166,8 @@ class StockDetailsViewController: UIViewController {
         print("Debug: metric viewModels: \(viewModels)")
         
         headerView.backgroundColor = .link
-        headerView.configure(chartViewModel: .init(data: [], showLegend: false, showAxis: false),
+        headerView.configure(chartViewModel: .init(data: candleStickData.reversed().map{ $0.close },
+                                                   showLegend: false, showAxis: false),
                              metricsViewModels: viewModels)
         tableView.tableHeaderView = headerView
         

@@ -48,6 +48,8 @@ class StockDetailsHeaderView: UIView {
     }
     
     func configure(chartViewModel: StockChartView.ViewModel, metricsViewModels: [MetricsCollectionViewCell.ViewModel]) {
+        chartView.configure(with: chartViewModel)
+        chartView.backgroundColor = .systemBackground
         self.metricViewModels = metricsViewModels
         collectionView.reloadData()
     }

@@ -24,6 +24,7 @@ class StockChartView: UIView {
         chartView.drawGridBackgroundEnabled = false
         chartView.leftAxis.enabled = false
         chartView.rightAxis.enabled = false
+        chartView.legend.enabled = false
         return chartView
     }()
     
@@ -53,6 +54,10 @@ class StockChartView: UIView {
         }
         
         let dataSet = LineChartDataSet(entries: entries, label: "Some Label")
+        dataSet.fillColor = .systemBlue
+        dataSet.drawFilledEnabled = true
+        dataSet.drawValuesEnabled = false
+        dataSet.drawCirclesEnabled = false
         let data = LineChartData(dataSet: dataSet)
         chartView.data = data
     }
