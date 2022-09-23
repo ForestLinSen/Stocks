@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B902058328A0EBF400482C91 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B902058228A0EBF400482C91 /* SDWebImage */; };
 		B90BDFA42897BB9700665D17 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90BDFA32897BB9700665D17 /* StockDetailsViewController.swift */; };
-		B921946B28DC806F00C03479 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B921946A28DC806F00C03479 /* Charts */; };
 		B947A5E62894FEA00052038D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A5E52894FEA00052038D /* SearchResponse.swift */; };
 		B94B7E6A28D70CD000873716 /* StockDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94B7E6928D70CD000873716 /* StockDetailsHeaderView.swift */; };
 		B94B7E6C28D75F7100873716 /* MetricsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94B7E6B28D75F7100873716 /* MetricsResponse.swift */; };
@@ -20,6 +19,7 @@
 		B9532FF3288D3F8B006BCC49 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF2288D3F8B006BCC49 /* PersistenceManager.swift */; };
 		B9532FF5288D9C83006BCC49 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9532FF4288D9C83006BCC49 /* HapticsManager.swift */; };
 		B95921BB289155740049CAC9 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95921BA289155740049CAC9 /* SearchResultTableViewCell.swift */; };
+		B95B2DC028DDAF9B00CF5ECF /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B95B2DBF28DDAF9B00CF5ECF /* Charts */; };
 		B96C34F0289E3D3400E1C2A1 /* NewsStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C34EF289E3D3400E1C2A1 /* NewsStory.swift */; };
 		B96C34F2289EA55000E1C2A1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C34F1289EA55000E1C2A1 /* Extensions.swift */; };
 		B98685AC289A3CE4007B14C2 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = B98685AB289A3CE4007B14C2 /* FloatingPanel */; };
@@ -73,7 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B902058328A0EBF400482C91 /* SDWebImage in Frameworks */,
-				B921946B28DC806F00C03479 /* Charts in Frameworks */,
+				B95B2DC028DDAF9B00CF5ECF /* Charts in Frameworks */,
 				B98685AC289A3CE4007B14C2 /* FloatingPanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +197,7 @@
 			packageProductDependencies = (
 				B98685AB289A3CE4007B14C2 /* FloatingPanel */,
 				B902058228A0EBF400482C91 /* SDWebImage */,
-				B921946A28DC806F00C03479 /* Charts */,
+				B95B2DBF28DDAF9B00CF5ECF /* Charts */,
 			);
 			productName = Stocks;
 			productReference = B9B7AA892889AC92001AB447 /* Stocks.app */;
@@ -230,7 +230,7 @@
 			packageReferences = (
 				B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */,
+				B95B2DBE28DDAF9B00CF5ECF /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = B9B7AA8A2889AC92001AB447 /* Products */;
 			projectDirPath = "";
@@ -508,12 +508,12 @@
 				kind = branch;
 			};
 		};
-		B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */ = {
+		B95B2DBE28DDAF9B00CF5ECF /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		B98685AA289A3CE3007B14C2 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
@@ -532,9 +532,9 @@
 			package = B902058128A0EBF400482C91 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		B921946A28DC806F00C03479 /* Charts */ = {
+		B95B2DBF28DDAF9B00CF5ECF /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B921946928DC806F00C03479 /* XCRemoteSwiftPackageReference "Charts" */;
+			package = B95B2DBE28DDAF9B00CF5ECF /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
 		};
 		B98685AB289A3CE4007B14C2 /* FloatingPanel */ = {

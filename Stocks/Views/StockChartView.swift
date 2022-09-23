@@ -51,6 +51,10 @@ class StockChartView: UIView {
         for (index, value) in viewModel.data.enumerated() {
             entries.append(.init(x: Double(index), y: value))
         }
+        
+        let dataSet = LineChartDataSet(entries: entries, label: "Some Label")
+        let data = LineChartData(dataSet: dataSet)
+        chartView.data = data
     }
 
 }
