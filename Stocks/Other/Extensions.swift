@@ -10,12 +10,14 @@ import UIKit
 
 // MARK: - Notification
 extension Notification.Name{
+    /// Notification when symbol gets added to the watchlist
     static let didAddToWatchList = Notification.Name("didAddToWatchList")
 }
 
 // MARK: - Number, String and DateFormatter
 // Number formatter
 extension NumberFormatter {
+    /// Formatter for percent style
     static let percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = .current
@@ -24,6 +26,7 @@ extension NumberFormatter {
         return formatter
     }()
     
+    /// Formatter to decimal style
     static let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = .current

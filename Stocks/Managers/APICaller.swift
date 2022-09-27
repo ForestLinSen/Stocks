@@ -7,9 +7,10 @@
 
 import Foundation
 
+/// Object to manage API calls
 final class APICaller{
-    
-    static let shared = APICaller()
+    /// Singleton
+    public static let shared = APICaller()
     
     private struct Constants{
         static let apiKey = APIKeys.apiKey
@@ -18,6 +19,12 @@ final class APICaller{
     }
     
     // MARK: - Public
+    
+    
+    /// Search for a company
+    /// - Parameters:
+    ///   - query: Query string (symbol or name)
+    ///   - completion: Callback for the result: SearchResponse
     public func search(query: String, completion: @escaping (Result<SearchResponse, Error>) -> Void){
         // "https://finnhub.io/api/v1/search?q=someQuery"
         guard let safeQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
@@ -26,6 +33,11 @@ final class APICaller{
         request(url: url, expecting: SearchResponse.self, completion: completion)
     }
     
+    
+    /// Get news for type
+    /// - Parameters:
+    ///   - type: Company news or top news
+    ///   - completion: Callback for the result: [NewsStory]
     public func fetchNews(
         for type: NewsViewController.NewsType,
         completion: @escaping (Result<[NewsStory], Error>) -> Void
@@ -56,7 +68,12 @@ final class APICaller{
         }
     }
     
-    /// Fetch Candle data of the given symbol
+    
+    /// Get market data
+    /// - Parameters:
+    ///   - symbol: Market symbol
+    ///   - numberOfDays: Number of days back from today
+    ///   - completion: Result Callback: MarketDataResponse
     public func marketData(
         for symbol: String,
         numberOfDays: Int = 7,
@@ -78,6 +95,11 @@ final class APICaller{
         
     }
     
+    
+    /// Get financial metrics, like 52WeekHigh, beta, etc.
+    /// - Parameters:
+    ///   - symbol: Symbol of company
+    ///   - completion: Result callback: Metrics Response
     public func searchMetrics(symbol: String, completion: @escaping (Result<MetricsResponse, Error>) -> Void) {
         let url = createUrl(for: .metrics, queryParams: [
             "symbol": symbol
@@ -92,6 +114,7 @@ final class APICaller{
         case noDataReturned
     }
     
+    /// API endpoints. ex. https://finnhub.io/api/v1/news
     private enum Endpoint: String{
         case search
         case topStories = "news"
@@ -100,6 +123,12 @@ final class APICaller{
         case metrics = "stock/metric"
     }
     
+    
+    /// Create URL for endpoint
+    /// - Parameters:
+    ///   - endpoint: Endpoint to create for
+    ///   - queryParams: Additional query arguments
+    /// - Returns: Optional URL
     private func createUrl(for endpoint: Endpoint, queryParams: [String: String] = [:]) -> URL?{
         var urlString = Constants.baseUrl + endpoint.rawValue
         var queryItems = [URLQueryItem]()
@@ -120,6 +149,12 @@ final class APICaller{
         return URL(string: urlString)
     }
     
+    
+    /// Perform API calls
+    /// - Parameters:
+    ///   - url: URL to hit
+    ///   - expecting: Type we expect to decode data to
+    ///   - completion: Result callback
     private func request<T: Codable>(url: URL?, expecting: T.Type, completion: @escaping (Result<T, Error>) -> Void){
         guard let url = url else{
             completion(.failure(APIError.invalidUrl))
