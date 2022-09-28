@@ -7,9 +7,14 @@
 
 import Foundation
 
+
+/// Object to manage saved caches
 final class PersistenceManager{
+    
+    /// Singleton
     static let shared = PersistenceManager()
     
+    /// Reference to user defaults
     private let userDefaults: UserDefaults = .standard
     
     private struct Constants {
@@ -29,10 +34,18 @@ final class PersistenceManager{
         return userDefaults.stringArray(forKey: Constants.watchList) ?? []
     }
     
+    
+    /// Check if watch list contains item
+    /// - Parameter symbol: Symbol to check
+    /// - Returns: Boolean
     public func watchlistContains(symbol: String) -> Bool {
         return watchlist.contains(symbol)
     }
     
+    /// Add a symbol to watchlist
+    /// - Parameters:
+    ///   - symbol: Symbol to add
+    ///   - companyName: Company name for symbol being added
     public func addToWatchlist(symbol: String, companyName: String){
         var current = watchlist
         current.append(symbol)
@@ -43,6 +56,8 @@ final class PersistenceManager{
         NotificationCenter.default.post(name: .didAddToWatchList, object: nil)
     }
     
+    /// Remove item from watchlist
+    /// - Parameter symbol: Symbol to remove
     public func removeFromWatchlist(symbol: String){
         var newList = [String]()
         for item in watchlist where item != symbol {
@@ -53,10 +68,14 @@ final class PersistenceManager{
     }
     
     // MARK: - Private
+    
+    /// Cehck if user has been onboarded
     private var hasOnboarded: Bool {
         return userDefaults.bool(forKey: Constants.onboardedKey)
     }
     
+    
+    /// Set up default watclist items
     private func setUpDefaults() {
         let map: [String: String] = [
             "AAPL": "Apple Inc",
