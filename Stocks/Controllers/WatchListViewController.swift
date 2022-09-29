@@ -8,10 +8,16 @@
 import UIKit
 import FloatingPanel
 
-class WatchListViewController: UIViewController {
+/// VC to render watch list
+final class WatchListViewController: UIViewController {
     
+    /// Timmer to optimize searching
     private var searchTimer: Timer?
+    
+    /// Floating news panel
     private var panel: FloatingPanelController?
+    
+    /// Main view to render watch list
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(WatchlistTableViewCell.self,
@@ -21,6 +27,7 @@ class WatchListViewController: UIViewController {
     
     private var observer: NSObjectProtocol?
     
+    /// Width to track change label geometry
     static var maxChangeWidth: CGFloat = 0
     
     var searchWorkItem: DispatchWorkItem?
@@ -46,6 +53,7 @@ class WatchListViewController: UIViewController {
     
     // MARK: - Private Functions
     
+    /// Set up observer for watch list update
     private func setUpObserver() {
         observer = NotificationCenter.default.addObserver(forName: .didAddToWatchList,
                                                           object: nil,
@@ -66,6 +74,8 @@ class WatchListViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
+    
+    /// Set up candle stick data
     private func setUpWatchlistData(){
         
         print("Debug: begin to set up watch list data")
@@ -125,6 +135,10 @@ class WatchListViewController: UIViewController {
         self.viewModels = viewModels
     }
     
+    
+    /// Get change percentage for symbol data
+    /// - Parameter data: Collection of data
+    /// - Returns: Double percentage
     private func getChangePercentage(for data: [CandleStick]) -> Double {
         let latestDate = data[0].date
         
@@ -141,6 +155,9 @@ class WatchListViewController: UIViewController {
         return diff
     }
     
+    /// Gets latest closing price
+    /// - Parameter data: Collection of data
+    /// - Returns: String
     private func getLatestClosingPrice(from data: [CandleStick]) -> String {
         guard let closingPrice = data.first?.close else {
             return ""
@@ -149,6 +166,7 @@ class WatchListViewController: UIViewController {
         return String.formatted(number: closingPrice)
     }
     
+    /// Set up search and results controller
     private func setUpSearchViewController(){
         let resultVC = SearchResultViewController()
         resultVC.delegate = self
@@ -157,6 +175,7 @@ class WatchListViewController: UIViewController {
         navigationItem.searchController = searchVC
     }
     
+    /// Set up custom title view
     private func setUpTitleView(){
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: navigationController?.navigationBar.frame.height ?? 100))
         let titleLabel = UILabel(frame: CGRect(x: 10, y: 5, width: titleView.frame.width, height: titleView.frame.height - 15))
@@ -166,6 +185,7 @@ class WatchListViewController: UIViewController {
         navigationItem.titleView = titleView
     }
     
+    /// Sets up floating news panel
     private func setUpFloatingPanel(){
         let vc = NewsViewController(type: .topStories)
         let panel = FloatingPanelController()
