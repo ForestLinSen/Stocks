@@ -114,6 +114,7 @@ final class WatchListViewController: UIViewController {
     }
     
     
+    /// Create viewModel from the watchlistMap
     private func createViewModels(){
         var viewModels = [WatchlistTableViewCell.ViewModel]()
         
@@ -199,6 +200,9 @@ final class WatchListViewController: UIViewController {
 }
 
 extension WatchListViewController: UISearchResultsUpdating{
+    
+    /// Update search on key tap
+    /// - Parameter searchController: ref to search controller
     func updateSearchResults(for searchController: UISearchController) {
         
         searchWorkItem?.cancel()
@@ -256,9 +260,11 @@ extension WatchListViewController: SearchResultViewControllerDelegate{
         navigationItem.searchController?.searchBar.resignFirstResponder()
         
         // Present stock details VC
-        //        let vc = StockDetailsViewController(symbol: <#T##String#>, companyName: <#T##String#>, candleStickData: <#T##[CandleStick]#>)
-        //        vc.title = searchResult.displaySymbol
-        //        present(UINavigationController(rootViewController: vc), animated: true)
+        let vc = StockDetailsViewController(symbol: searchResult.displaySymbol,
+                                            companyName: searchResult.description,
+                                            candleStickData: [])
+        vc.title = searchResult.displaySymbol
+        present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
 
