@@ -271,6 +271,9 @@ extension WatchListViewController: SearchResultViewControllerDelegate{
 
 // Floating Panel Delegate
 extension WatchListViewController: FloatingPanelControllerDelegate{
+    
+    /// Change the state of title view based on floating panel state
+    /// - Parameter fpc: ref to floating panel
     func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
         navigationItem.titleView?.isHidden = (fpc.state == .full)
     }
